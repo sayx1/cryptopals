@@ -44,9 +44,12 @@ def recover_one_more_byte(known:bytes,bsize:int,key:int)->bytes:
     target_chunk = chunk_text[target_chunk_number]
     comp_text = chunks(target_chunk,1)[15] 
  
- 
-    letters= b"abcdefghijklmnopqrstuvwxyz :',." 
-    for i in range(0,256):
+    
+    letters = ",.?'-abcdefghsoijklmnpqrtuvwyxz\n ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+    num_let = []
+    for z in letters:
+        num_let.append(ord(z))
+    for i in num_let:
         test_plain = padding_data + known + bytes([i])
     
         test_cipher = encryption_oracle(test_plain,key)
@@ -56,22 +59,7 @@ def recover_one_more_byte(known:bytes,bsize:int,key:int)->bytes:
 
 
         if comp_text == comp_test:
-            if i == 9 or i ==28 or i == 68 or i == 7 or i== 91 or i == 16 or i == 72 or i == 17 or i == 54 or i == 8 or i == 0 or i == 43:
-                continue
-    
-            if len(known) == 31:
-                if bytes([i]) == b'n':
-                    continue
-            if len(known) == 34:
-                if bytes([i]) == b'5':
-                    continue
-            if len(known) == 40 or len(known)==42 or len(known)==43:
-                if bytes([i]) == b'E' or bytes([i]) == b")" or bytes([i])==b'5':
-                    continue
-
-            
-
-            print(len(known)) 
+            #print(len(known)) 
             #print(i,bytes([i]))
             return (bytes([i]))
     
