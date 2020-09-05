@@ -9,10 +9,7 @@ def encryption_oracle(text:bytes,key:bytes)->bytes:
     """ takes a bunch of text, adds a bunch of additional 
         text, generates a random key and initilization
         vector. then randomly encrypts it in ebc or cbc
-
-
     param1: text to be encrypted (bytes)
-
     rtype: encrypted text (bytes)
     """
 
@@ -79,11 +76,7 @@ def recover_one_more_byte(known:bytes,bsize:int,key:int)->bytes:
 def one_byte_a_time(bsize:int,key:bytes)->bytes:
     """
     param1: block size we require 
-
     rerturn secret text
-
-
-
     """
     print("A_byte_at_a_time_attack")
 
@@ -100,8 +93,6 @@ def one_byte_a_time(bsize:int,key:bytes)->bytes:
 
     """
     plain_text = b''
-
-
     secret = b''
     for j in range():
         plain_text = b''
@@ -111,8 +102,6 @@ def one_byte_a_time(bsize:int,key:bytes)->bytes:
             plain_text = plain_text + b'A'
         if bsize == 15:
             compare_when_iter = plain_text
-
-
         cipher = encryption_oracle(plain_text,key)
         chunk_text = chunks(cipher,16)
         print(chunk_text)
@@ -121,7 +110,6 @@ def one_byte_a_time(bsize:int,key:bytes)->bytes:
         letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789'
         for i in letters:
                 temp = compare_when_iter + bytes(i.encode('utf-8'))
-
                 test_cipher = encryption_oracle(temp,key)
                 test_chunks = chunks(test_cipher,16) 
                 print(test_chunks)
@@ -135,7 +123,6 @@ def one_byte_a_time(bsize:int,key:bytes)->bytes:
                     print(len(compare_when_iter))
                 
     print("This",secret)
-
 """
 def find_block_size(key:bytes):
     text = b"A"
@@ -173,9 +160,7 @@ def encrypt_aes_ecb(text:bytes,key:bytes)->bytes:
         pkcs (#PKCS7)
     param1 : text to be encrypted (bytes)
     key : key to encrypt (bytes)
-
     r_type : cipher text (bytes)
-
     """
     chunk_text = chunks(text,16)
     padded_chunks = padded_text(chunk_text)
@@ -193,9 +178,7 @@ def decrypt_aes_ecb(cipher_text:bytes,key:bytes)->bytes:
         returns plain text
     param1 : text to be encrypted (bytes)
     key : key to encrypt (bytes)
-
     r_type : cipher text (bytes)
-
     """
 
     chunk_text = chunks(cipher_text,16)
@@ -215,13 +198,10 @@ def decrypt_aes_ecb(cipher_text:bytes,key:bytes)->bytes:
 
 def encrypt_128_aes_cbc(text:bytes,key:bytes,iv:bytes)->bytes:
     """function to take plaintext and encrypt it using aes 128 cbc 
-
     param1 -> plaintext
     param2 -> key to encrypt data
     iv -> initilization vector
-
     return cipher text 
-
     """
     chunk_text = chunks(text,16)
     padded_chunks = padded_text(chunk_text)
@@ -261,7 +241,6 @@ def padding(msg:bytes, bsize:int)->bytes:
     """ pad the message to the blocksize using the PKCS#7 padding scheme 
     :param msg -> message to pad (bytes)
     :param bsize -> the block size to use (int)
-
     return padded message (bytes)
     """
 
@@ -299,7 +278,6 @@ def randomkey(length:int)->bytes:
 def additional_text(text:bytes)->bytes:
     """appends a random number of letter to the front and back of the plain text
     pram1 -> plain text data
-
     rturn plain text with random letters front and back
     """
     frontlen = random.randint(5,10)
@@ -351,7 +329,6 @@ def chunks(text:bytes,blocksize:int)->bytes:
     """
     pram1: whole encrypted messages 
     pram2: amount of chunks needed 
-
     return array of chunks of data
     """
     chunk_data = b''
@@ -381,4 +358,3 @@ if __name__ == '__main__':
     #for i in range(100):
     #    cipher = encryption_oracle(text,key)
     #    print(cipher)
-
