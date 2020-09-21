@@ -1,0 +1,117 @@
+def randomkey(length:int)->bytes:
+    """
+    function returns a random key of given length
+    param1: length of key (int)
+    
+    return: key (bytes)
+    """
+    letters = b'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789'
+    key = b''
+    for i in range(length):
+        j = random.randint(1,62)
+        key = key + letters[j:j+1]
+    return key
+
+
+def padding(msg:bytes, bsize:int)->bytes:
+    """ pad the message to the blocksize using the PKCS#7 padding scheme 
+    :param msg -> message to pad (bytes)
+    :param bsize -> the block size to use (int)
+    return padded message (bytes)
+    """
+
+    if bsize<2 and bsize>255:
+        raise ValueError
+
+    msg_len = len(msg)
+    pad_size = bsize - (msg_len % bsize)
+    pad_val = pad_size.to_bytes(1, sys.byteorder, signed=False)
+    padding = pad_val * pad_size
+    return(msg+padding)
+
+def padded_text(chunk_text:bytes)->bytes:
+    """ returns padded chunks when chunks are sent using `function`
+
+    param1: list of cipher chunks
+    
+    return: list of padded text
+
+    """
+    
+    padded_chunks = []
+    for i in chunk_text:
+        if len(i) != 16:
+            padded_chunks.append(padding(i,16))
+        else:
+            padded_chunks.append(i)
+
+    return padded_chunks
+
+def chunks(text:bytes,blocksize:int)->bytes:
+    """
+    pram1: whole encrypted messages 
+    pram2: amount of chunks needed 
+    return array of chunks of data
+    """
+    chunk_data = b''
+    chunks = []
+    for i in range(0,len(text),blocksize):
+        chunk_data = text[i:i+blocksize] 
+        chunks.append(chunk_data)
+    return chunks
+
+
+def encrypt_128_aes_ecb(text:bytes,key:bytes)->bytes:
+    cipher = AES.new(key,AES.MODE_ECB)
+    cipher_text = cipher.encrypt(text)
+    return cipher_text
+
+
+
+def decrypt_128_aes_ecb(text:bytes,key:bytes)->bytes:
+    cipher = AES.new(key,AES.MODE_ECB)
+    plaintext = cipher.decrypt(text)
+    return plaintext
+
+def xor_chunks(text:bytes,p_text:bytes)->bytes:
+    return bytes([_a ^ _b for _a, _b in zip(text, p_text)])
+
+def encrypt_aes_ecb(text:bytes,key:bytes)->bytes:
+    """ takes a bunch of text and splits it in chunks, pads it in
+        pkcs (#PKCS7)
+    param1 : text to be encrypted (bytes)
+    key : key to encrypt (bytes)
+    r_type : cipher text (bytes)
+    """
+    chunk_text = chunks(text,16)
+    padded_chunks = padded_text(chunk_text)
+    cipher_text = b''
+    for i in padded_chunks:
+
+        cipher = encrypt_128_aes_ecb(i,key)
+        cipher_text += cipher
+    return cipher_text
+
+
+
+def decrypt_aes_ecb(cipher_text:bytes,key:bytes)->bytes:
+    """ takes a bunch of cipher text and splits it in chunks and
+        returns plain text
+    param1 : text to be encrypted (bytes)
+    key : key to encrypt (bytes)
+    r_type : cipher text (bytes)
+    """
+
+    chunk_text = chunks(cipher_text,16)
+    plain_text = b''
+    for i in chunk_text:
+        '''
+        print("i",i)
+        print("previous",previous_chunk)
+        print("")
+        '''
+        plain = decrypt_128_aes_ecb(i,key)
+        plain_text = plain_text + plain
+    return plain_text
+
+

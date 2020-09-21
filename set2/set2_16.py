@@ -351,14 +351,6 @@ def cbc_bitflipping():
 
        y xor t[i] = ';'
        y = ';' xor t[i] = ';' xor  "A" xor w[i]
-    """
-
-
-
-
-
-
-    """
     user_data = 'n;e=w;g=o=og;l=e;'
     cipher = encryption_oracle(user_data)
     print(cipher)
