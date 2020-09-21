@@ -33,11 +33,11 @@ In cryptography, a padding oracle attack is an attack which uses the padding val
 
 ### Padding Oracle attack on CBC Encryption
 
-![/Untitled.png](/Untitled.png)
+![Untitled.png](Untitled.png)
 
 $$    {\displaystyle P_{i}=D_{K}(C_{i})\oplus C_{i-1}} \space \space where\space     {C_{0}} = IV . $$
 
-![/Untitled%201.png](/Untitled%201.png)
+![Untitled%201.png](Untitled%201.png)
 
 how this will work with,
 
@@ -45,7 +45,7 @@ $$P_{i}=decrypt(C_{i})⊕C_{i−1}$$
 
 According to the problem the only thing we have access to is the cipher text blocks so we need to change the cipher text blocks and obtain the plain text. Also, when we change the a single byte of say C(0) plain text of P(1) will change. 
 
-![/Untitled%202.png](/Untitled%202.png)
+![Untitled%202.png](Untitled%202.png)
 
 When we get the last byte then for the second last byte we need to make sure that we change the last byte into '\xo2'
 
