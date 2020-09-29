@@ -6,16 +6,18 @@ Based on excellent Solutions from
 
 [`https://ljhsiung.com/posts/cryptopals-set-3/`](https://ljhsiung.com/posts/cryptopals-set-3/)  
 
+
+
 A cryptographically secure PRNG must hold is even if attacker knows partial sequence of output, the attacker shouldn't be able to distinguish it from truly random sequence and hence is not able to predict any future output. Any attacker can easily clone  clone an MT19937 RNG from its output.
 
-The Algorithm works as follows:
+The Algorithm works for generating random number using MT algorithm works as follows:
 
 1. First we initialize the parameters.
 2. Define higher and lower mask
 3. Then we use the seed and an equation to generate 1 to 624 numbers.
 4. The 624 numbers are put through several shifts to give us the random number.
 
-Our job is to revert the number to the 624 numbers untempering the tempering function. Let's see the tempering function in action.
+Our job is to revert the number to the 624 numbers untempering the tempering function. We just need to foucs on the last part of the algorithm. Let's see the tempering function in action.
 
 ![Untitled.png](Untitled.png)
 
