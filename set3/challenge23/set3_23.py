@@ -26,7 +26,7 @@ def undo_right_shift(final_y:int,shift_val:int)->int:
 
     return int(y, 2)
 
-def undo_left_shift(final_yi:int,shift_val:int,add_val:int)->int:
+def undo_left_shift(final_y:int,shift_val:int,add_val:int)->int:
     '''
     parm1: final_y which is left shifted by left shift 
     param2: shift val
