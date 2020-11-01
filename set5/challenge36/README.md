@@ -38,11 +38,12 @@ so server cannot determine if user share the  same password )
 
 `Client` and `Server` u = `H ( A , B )`
 
-`Client` →Shared Key Client = ![equation](https://latex.codecogs.com/gif.latex?%5Cinline%20%28B-k*g%5Ex%29%5E%7B%28a%20&plus;%20ux%29%7D%20%3D%20%28kv%20&plus;%20g%5Eb-kg%5Ex%29%5E%7B%28a%20&plus;%20ux%29%7D%20%3D%20%28kg%5Ex-kg%5Ex%20&plus;%20g%5Eb%29%5E%7B%28a%20&plus;%20ux%29%7D%20%3D%20%28g%5Eb%29%5E%7B%28a%20&plus;%20ux%29%7D)
+`Client` →Shared Key Client = ![equation](https://latex.codecogs.com/gif.latex?%28B-kg%5Ex%29%5E%7B%28a%20&plus;%20ux%29%7D%20%3D%20%28kv%20&plus;%20g%5Eb-kg%5Ex%29%5E%7B%28a%20&plus;%20ux%29%7D%20%3D%20%28kg%5Ex-kg%5Ex%20&plus;%20g%5Eb%29%5E%7B%28a%20&plus;%20ux%29%7D%20%3D%20%28g%5Eb%29%5E%7B%28a%20&plus;%20ux%29%7D)
 
 `Client` → `H ( Shared Key Client )`
 
-`Server` → Shared Key Server = ![equation](https://latex.codecogs.com/gif.latex?%5Cinline%20%28g%5Eav%5Eu%29%5Eb%20%3D%20%5Bg%5Ea%28g%5Ex%29%5Eu%5D%5Eb%20%3D%20%28g%5E%7Ba%20&plus;%20ux%7D%29%5Eb%20%3D%20%28g%5Eb%29%5E%7B%28a%20&plus;%20ux%29%7D)
+`Server` → Shared Key Server = ![equation](https://latex.codecogs.com/gif.latex?%28Av%5Eu%29%5Eb%20%3D%20%28g%5Eav%5Eu%29%5Eb%20%3D%20%5Bg%5Ea%28g%5Ex%29%5Eu%5D%5Eb%20%3D%20%28g%5E%7Ba%20&plus;%20ux%7D%29%5Eb%20%3D%20%28g%5Eb%29%5E%7B%28a%20&plus;%20ux%29%7D)
+
 
 `Server` → `H ( Shared Key Server)`
 
