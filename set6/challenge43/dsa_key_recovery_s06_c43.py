@@ -9,10 +9,10 @@ def generate_keys():
         p = gensafeprime.generate(1024)
         q = gensafeprime.generate(160)
         if((p-1)%q == 0):
-            alph = gen_alpha(p,q)
-            d = random.randint(1,q-1)
-            B = pow(alph,d,p)
-            pub = (p,q,alph,B) 
+            g = gen_alpha(p,q)
+            x = random.randint(1,q-1)
+            y = pow(alph,d,p)
+    
 '''
 
 def gen_alpha(p,q):
