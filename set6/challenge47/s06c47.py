@@ -111,11 +111,20 @@ def gen_Next_Interval(lower_bound,upper_bound,s,B):
     return(next_a,next_b)
 
 
-def bleichenbacher_pkcs_1(ciphertext):
+def bleichenbacher_pkcs_1(ciphertext):i
+    '''
+        breaking RSA PKCS #1 1.5 using padding oracle attack
+    '''
     e , n = public
+    # number of bytes (8 bit == 1 byte)
     k = ( n.bit_length() + 7 ) // 8
+    # B = 2**(k-16) 
     B = pow(2,(8*k)-16)
+
+    # message lies in [2B,3B-1]
     lower_bound,upper_bound = ( 2*B, 3*B-1 )
+    
+    #compute s by finding small such that c * s^e mod n is accepted
     s,c = first_S(B,ciphertext)
     print('++first s found++')
     lower_bound,upper_bound = gen_Next_Interval(lower_bound,upper_bound,s,B)    
